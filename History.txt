@@ -1,0 +1,108 @@
+
+PMDLL Change Log
+================
+
+Tue Apr 02 17:06:51 2013  Steven H. Levine <steve53@earthlink.net>
+
+	* Release Version 2.11
+
+	* Default DLL extension only if needed (Gregg Young)
+
+	* Allow extensions other than .DLL or .EXE to be viewed
+
+Sat May 12 20:05:51 2012  Steven H. Levine <steve53@earthlink.net>
+
+	* Release Version 2.10
+
+	* Support extended LIBPATH
+
+Sun Apr 22 18:02:17 2012  Steven H. Levine <steve53@earthlink.net>
+
+	* Release Version 2.9
+
+	* Avoid spurious display rebuild after Load SysDlls toggle
+
+	* Add exceptq support
+
+Wed Mar 15 19:34:17 2006  Steven H. Levine <steve53@earthlink.net>
+
+	* Release Version 2.9beta4
+
+	* Support full paths (thanks to Yuri Dario)
+
+	* Show load fail reason (thanks to Yuri Dario)
+
+	* Support gcc (thanks to Yuri Dario)
+
+	* Switch to OpenWatcom for standard builds
+
+Thu Dec 16 10:04:26 2004  Steven H. Levine <steve53@earthlink.net>
+
+	* Release Version 2.9beta3
+
+	* Document gcc libc0x.dll restriction
+
+	* Rework font loading logic and error reporting
+
+	* Rework error reporting and shutdown logic
+
+	* Add exceptq support for special builds
+
+	* Add Load Systems DLLs menu option
+
+	* Avoid Tree Build process vs. dialog race
+
+	* General internal clean up
+
+Mon Jun 11 09:16:08 PDT 2001  Steven H. Levine <steve53@earthlink.net>
+
+	* Release Version 2.8
+
+	* Bypass failure to load private SYSMONO fonts and dieing with error 1.
+
+	* Relax LIBPATH find logic.
+
+	* Support LX's without 16-bit stub
+
+	* Avoid buffer overflow on .exe with long name
+
+	* Rework draw routines to handle long names
+
+	* Add some of missing keyboard accelerators
+
+Tue May 22 09:20:54 PDT 2001  Steven H. Levine <steve53@earthlink.net>
+
+	* Release Version 2.7
+
+	* Rework font list build logic to avoid selecting nothing
+	  and dieing with error 5
+
+	* Correct Y2K formatting errors
+
+	* Add NLS formatting logic
+
+Wed Jan 10 20:18:52 PST 2001  Steven H. Levine <steve53@earthlink.net>
+
+	* Release version 2.6
+
+	* Build with VAC 3.08
+
+	* Update about dialog
+
+	* Update contact information
+
+Sat Nov 09 13:58:12 1999  Arthur van Beek <avbeek@allshare.nl>
+
+	* Version 2.5 released
+
+	* Hyperlink feature for 'blue' DLLs
+
+	* Resource limits are configurable
+
+Sat Apr 29 9:12:34 1995  Arthur van Beek <avbeek@allshare.nl>
+
+	* version 2.34 released
+
+	* Support for dynamically loaded DLLs
+
+$Id: History.txt,v 1.9 2013/04/03 00:13:35 Steven Exp $

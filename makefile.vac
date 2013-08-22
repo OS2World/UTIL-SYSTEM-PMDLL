@@ -1,0 +1,137 @@
+# makefile.vac - Make pmdll with VAC
+# Copyright (c) 2001, 2006 Steven Levine and Associates, Inc.
+# All rights reserved.
+
+# $TLIB$: $ &(#) %n - Ver %v, %f $
+# TLIB: $ &(#) makefile.vac - Ver 6, 15-Mar-06,20:08:30 $
+
+# 10 Jan 01 SHL Baseline
+# 22 May 01 SHL Add map, comments
+# 26 Jun 01 SHL Rename to pmdllid.h
+# 13 Dec 04 SHL Make location insensitive
+# 15 Mar 06 SHL Remove VAC Workframe-isms
+
+# Created by IBM WorkFrame/2 MakeMake at 21:24:13 on 10 Jan 2001
+#
+.SUFFIXES:
+
+.SUFFIXES: .c .rc .obj .res 
+
+.c.obj:
+    icc.exe /Ss /Ti /Gm /G4 /C %s
+
+.rc.res:
+    rc.exe -r %s %|fF.RES
+
+all: pmdll.exe
+
+# Add /de to /B"..." to enable debug
+# Add /ma /li to /B"..." to generate map with line numbers
+
+pmdll.exe: \
+    TRACE.obj \
+    TREE_WND.obj \
+    CHGDIR.obj \
+    EXEHDR.obj \
+    FINDDLL.obj \
+    HLP_FUNC.obj \
+    LIBPATH.obj \
+    PMDLL.obj \
+    PRINT.obj \
+    SEL_FILE.obj \
+    SEL_FONT.obj \
+    SYSDLL.obj \
+    PMDLL.res \
+    d:\sla_lib2\slalib.lib
+    @echo " Link::Linker "
+    @echo " Bind::Resource Bind "
+    icc.exe @<<
+     /B" /de /ma /li /pmtype:pm"
+     /Fepmdll.exe 
+     d:\sla_lib2\slalib.lib 
+     TRACE.obj
+     TREE_WND.obj
+     CHGDIR.obj
+     EXEHDR.obj
+     FINDDLL.obj
+     HLP_FUNC.obj
+     LIBPATH.obj
+     PMDLL.obj
+     PRINT.obj
+     SEL_FILE.obj
+     SEL_FONT.obj
+     SYSDLL.obj
+<<
+    rc.exe pmdll.res pmdll.exe
+
+TRACE.obj: \
+    TRACE.C \
+    pmdll.h \
+    pmdllid.h
+
+SYSDLL.obj: \
+    SYSDLL.C \
+    pmdll.h \
+    pmdllid.h
+
+SEL_FONT.obj: \
+    SEL_FONT.C \
+    pmdll.h \
+    pmdllid.h
+
+SEL_FILE.obj: \
+    SEL_FILE.C \
+    pmdll.h \
+    pmdllid.h
+
+PRINT.obj: \
+    PRINT.C \
+    pmdll.h \
+    pmdllid.h
+
+PMDLL.obj: \
+    PMDLL.C \
+    pmdll.h \
+    pmdllid.h
+
+LIBPATH.obj: \
+    LIBPATH.C \
+    pmdll.h \
+    pmdllid.h
+
+HLP_FUNC.obj: \
+    HLP_FUNC.C \
+    pmdll.h \
+    pmdllid.h
+
+FINDDLL.obj: \
+    FINDDLL.C \
+    pmdll.h \
+    pmdllid.h
+
+EXEHDR.obj: \
+    EXEHDR.C \
+    pmdll.h \
+    pmdllid.h
+
+CHGDIR.obj: \
+    CHGDIR.C \
+    pmdll.h \
+    pmdllid.h
+
+TREE_WND.obj: \
+    TREE_WND.C \
+    pmdll.h \
+    pmdllid.h
+
+PMDLL.res: \
+    PMDLL.Rc \
+    \SLA_DEV2\PMDLL\PMDLL.ICO \
+    {.;$(INCLUDE)}pmdllid.h \
+    {.;$(INCLUDE)}os2.h
+
+clean:
+   -del *.obj
+   -del *.exe
+   -del *.map
+   -del *.res

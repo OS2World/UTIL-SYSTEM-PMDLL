@@ -1,0 +1,189 @@
+Description of PMDLL.EXE
+========================
+
+PMDLL is an OS/2 presentation manager program that shows you the complete
+tree of DLLs loaded by an OS/2 executable file or by a DLL (both 16 and 32 
+bit formats are supported). Sometimes it's uncertain why a program won't start 
+(correctly) or behaves strange when running. When this program is using DLLs
+one of the causes can be that DLLs can't be found or that DLLs are loaded 
+from unexpected directories which contain an incorrect version of the DLL. 
+PMDLL gives you an easy way to detect these kind of problems.
+
+  This utility is placed in Public Domain and can be concidered
+  freeware, this utility may not be sold, hired, leased or modified, 
+  it may be freely copied as a complete package.
+
+
+New in version 2.34
+===================
+
+  - Support for dynamically loaded DLLs
+
+
+About DLLs
+==========
+
+Most OS/2 programs require the existance of one or more DLLs which are 
+loaded by OS/2 the moment the program is started. The majority of these 
+DLLs can be found in your \OS2\DLL directory but often a program 
+is distributed with some DLLs of its own. Problems start when a DLL 
+required for a program is missing or seems to be missing or when more 
+than one version of a DLL is present on your system. To find DLLs when
+a program is started, OS/2 uses the searchpath provided in the 'LIBPATH='
+statement in your config.sys. After installation of OS/2 it looks like:
+
+  LIBPATH=.;C:\OS2\DLL;C:\OS2\MDOS;C:\;
+
+This example LIBPATH statement contains 4 entries:
+
+  .             = Search current directory (some older versions of OS/2 did
+                  not add this entry after installation which can be very 
+                  handy, check your config.sys).
+  C:\OS2\DLL    = The OS/2 system DLL directory
+  C:\OS2\MDOS   = The OS/2 DOS system DLL directory
+  C:\           = The root of your OS/2 system disk
+
+Consider the following example. Suppose you have installed a program called
+APROG.EXE together with a DLL APROG.DLL in the C:\APROG directory and you are
+using the standard settings of the LIBPATH command described above. When you
+try to start MYPROG.EXE from C:\ (with the 'C:\APROG\APROG' command) it won't 
+start because APROG.DLL can not be found by OS/2 in the 'LIBPATH=' search 
+path. If you start APROG.EXE from the C:\APROG directory itself it will start 
+because of the '.' entry in your LIBPATH. So the current directory can be 
+important for locating DLLs. That's why PMDLL gives you the possiblity to
+change it's current directory (see below). 
+
+Another example. Suppose you have installed the program called APROG.EXE 
+in the C:\APROG directory and APRG.DLL in the C:\APROG\DLL directory. You 
+changed the settings of the LIBPATH command to:
+
+  LIBPATH=.;C:\OS2\DLL;C:\OS2\MDOS;C:\;C:\APROG\DLL;
+
+When there is only one single instance of APROG.DLL on your system the
+program APROG.EXE will certainly use the DLL in C:\APROG\DLL. However if
+the program behaves unexpectedly, the possiblity exists that there is another
+version of the DLL somewhere in the directories of your LIBPATH. When 
+examining APROG.EXE in PMDLL you can determine which DLLs are loaded by 
+APROG.EXE and where they are loaded from.
+
+Besides the DLLs statically linked to an EXE or DLL, a program can also load 
+a DLL during run time. Because no program can ever predict which DLLs an 
+executable will load during run time, PMDLL needs to trace the program you want
+to investigate. Every time PMDLL senses that the program loads a DLL it will
+display its name.
+
+
+Using PMDLL
+===========
+
+Just enter 'start PMDLL' from an OS/2 command prompt or create a program object
+on your desktop. The program will start with a 'Open file' dialog where you can
+select the EXE or DLL file you want to test (you can also start the program 
+with the name of the executable you want to examine as a parameter). For now
+you can select the PMDLL.EXE program itself. The result is maybe a little bit
+boring because the PMDLL.EXE program only loads some standard OS/2 DLLs. To 
+give you a much nicer view select 'System DLL paths' from the options menu. 
+Press the delete button on the '?:\OS2\DLL' entry (where ? is the drive where
+you have installed OS/2) and press the 'Use' button. The tree will be much 
+more interesting now.
+
+  What do these colors mean?
+
+    Black:  Names of DLLs in black are OK (normal situation)
+    Gray:   These DLLs are found in one of the 'System DLL paths' you
+            provided in the 'Options' menu. These DLLs are considered to be
+            OK and are not decomposed any further nor test loaded (see 
+            'Options' menu).
+    Blue:   These DLLs are OK but are not decomposed because they appeared
+            already in the tree of DLLs and were decomposed there. In our 
+            example PMDLL.EXE is calling amongst others PMGPI.DLL. PMGPI.DLL 
+            is calling (besides DOSCALL1.DLL) PMMERGE.DLL which in turn calls
+            PMGPI.DLL again. PMGPI.DLL was already being decomposed so its
+            painted in blue now.
+    Red:    This DLL can't be found or can't be loaded.
+
+
+  Uppercase/lowercase
+
+    Uppercase: DLL was statically loaded
+
+    Lowercase: DLL was dynamicaly loaded (see 'Trace' option in 'File' menu).
+
+
+Click on an entry with your mouse and you can view some information about
+the DLL you have selected. The 'File path' shows you from where the DLL is 
+loaded.
+
+
+The menu items
+==============
+
+The 'File' menu.
+
+  'About'    : Gives you version information of PMDLL and my address in case
+               you have any comments/suggestions to make.
+  'Select'   : Select an EXE/DLL file for decomposing.
+  'Refresh'  : After you have deleted/moved/copied some DLLs in another 
+               session you can select 'Refresh' to rebuild the tree.
+  'Trace'    : After the DLLs of an executable have been decomposed 
+               successfully, you can start tracing dynamically loaded DLLs. 
+               When selecting this menu choice you can start tracing by 
+               clicking the 'Start' button on the dialog that follows. 
+               To stop tracing, either click the 'Stop' button on this dialog 
+               (the program being traced is killed after a confirmation) or
+               simply exit the program being traced in the normal way. If 
+               one or more dynamically loaded DLLs have been found you can 
+               press the 'Merge' button to include them in your tree of DLLs.
+               Remember that statically loaded DLLs are shown in uppercase, 
+               dynamically loaded DLLs in lowercase. The dynamically loaded
+               DLLs found, can depend on the way you navigate through the
+               program being traced.
+  'Find DLL' : You can enter the name of a single DLL to look from where
+               it would be loaded. 
+  'Print'    : Send the information shown on your screen to a printer.
+  'Exit'     : Leave the program.
+
+The 'Options' menu:
+
+  'Current directory'  : You can change the current directory of PMDLL. This
+                         can have influence on the way DLLs are loaded.
+  'System DLL paths'   : To limit the size of the tree you can enter some paths
+                         here. DLLs found in these directories are not 
+                         decomposed any further and are depicted in gray. 
+                         'C:\OS2\DLL' (if C: is your OS/2 drive) is a good 
+                         candidate but maybe also directories like 
+                         'C:\TCPIP\DLL' or 'C:\SQLLIB\DLL'.
+  'Change OS/2 libpath': You can change the 'LIBPATH=' statement in 
+                         your CONFIG.SYS. PMDLL will use the modified LIBPATH
+                         immediately, OS/2 however only after rebooting. 
+  'Test load DLLs'     : When this option is checked, PMDLL will try to load 
+                         every found DLL (except DLLs found in the 
+                         'System DLL paths'). Loading a DLL will sometimes 
+                         give problems because some DLLs contain a special 
+                         piece of startup code which will be executed by OS/2
+                         the moment the DLL is loaded by the system. This piece
+                         of code can report a problem back to OS/2 and OS/2 
+                         will stop loading your program. With this option 
+                         checked the creation of the tree will take some more
+                         time, or PMDLL may even abort because this piece of
+                         code contains a serious error, so be aware.
+  'Tree view'          : Toggle between tree view and line view (just try it).
+  'Select font'        : Change the font used for drawing the tree.
+
+
+
+Known problems/shortcomings
+===========================                         
+
+ - Windows EXE/DLLs are not supported.
+
+ - Some DLLs which are testloaded refuse to unload again 
+   (the DosFreeModule () call failes) these DLLs stay loaded until
+   PMDLL is stopped.
+
+
+Author
+======
+
+Arthur van Beek
+CompuServe 100275,2347

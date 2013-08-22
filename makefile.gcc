@@ -1,0 +1,37 @@
+# makefile.gcc - contributed by Yuri Dario
+# 2006-01-17 YD Baseline
+# 2012-04-24 SHL Remove some residual OpenWatcom-isms
+
+# Assumes gcc 3.3.5 or better
+
+# 2012-04-24 SHL fixme to not have hardcoded paths
+CC=gcc -c
+RC=rc -i E:\dev\toolkit452\h
+LD=gcc -Zexe
+CFLAGS=-g -IE:\dev\toolkit452\h
+CFLAGS=-g
+LDFLAGS=-Zbin-files -Zomf
+OBJ=o
+
+.SUFFIXES: .res .rc
+
+# Add '-d2' to enable debug
+.c.$(OBJ) :
+	$(CC) $(CFLAGS) $<
+
+.rc.res:
+	$(RC) -r $<
+
+OBJS = trace.$(OBJ) tree_wnd.$(OBJ) chgdir.$(OBJ) exehdr.$(OBJ) finddll.$(OBJ) \
+	hlp_func.$(OBJ) libpath.$(OBJ) pmdll.$(OBJ) print.$(OBJ) sel_file.$(OBJ) \
+	sel_font.$(OBJ) sysdll.$(OBJ)
+
+pmdll.exe : $(OBJS) pmdll.res
+	$(LD) $(LDFLAGS) -o $@ $(OBJS) pmdll.res pmdll.def
+	$(RC) pmdll.res pmdll.exe
+	if exist pmdll del pmdll
+
+clean :
+	rm -f *.$(OBJ) *.exe *.res
+
+# The end
