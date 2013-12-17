@@ -14,6 +14,7 @@ COMPILE TOOLS
 AUTHORS
 ===============
 * Steve H. Levine
+* Arthur van Beek
 
 LINKS
 ===============
