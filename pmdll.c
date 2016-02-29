@@ -2,7 +2,7 @@
 /***********************************************************************
 
 pmdll.c - Startup and main window
-$Id: pmdll.c,v 1.10 2013/04/03 00:14:19 Steven Exp $
+$Id: pmdll.c,v 1.11 2016/02/27 04:43:00 Steven Exp $
 
 Copyright (c) 2001, 2013 Steven Levine and Associates, Inc.
 Copyright (c) 1995 Arthur Van Beek
@@ -50,7 +50,7 @@ All rights reserved.
 #include "exceptq.h"
 #endif
 
-#define PGM_VERSION "2.11"
+#define PGM_VERSION "2.12"
 
 #define NR_OF_DET_LINES		5
 #define FRAME_CX_MIN		400

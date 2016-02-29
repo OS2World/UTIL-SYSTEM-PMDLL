@@ -2,6 +2,12 @@
 PMDLL Change Log
 ================
 
+Fri Feb 26 19:46:26 2016  Steven H. Levine <steve53@earthlink.net>
+
+	* Release Version 2.12
+
+	* Avoid exception if exe header offset bogus (Neil Waldhauer)
+
 Tue Apr 02 17:06:51 2013  Steven H. Levine <steve53@earthlink.net>
 
 	* Release Version 2.11
@@ -105,4 +111,4 @@ Sat Apr 29 9:12:34 1995  Arthur van Beek <avbeek@allshare.nl>
 
 	* Support for dynamically loaded DLLs
 
-$Id: History.txt,v 1.9 2013/04/03 00:13:35 Steven Exp $
+$Id: History.txt,v 1.10 2016/02/27 04:43:00 Steven Exp $

@@ -2,7 +2,7 @@
 /***********************************************************************
 
 sel_file.c - Select file
-$Id: sel_file.c,v 1.5 2013/04/03 00:11:49 Steven Exp $
+$Id: sel_file.c,v 1.6 2016/02/27 04:43:00 Steven Exp $
 
 Copyright (c) 2001, 2013 Steven Levine and Associates, Inc.
 Copyright (c) 1994 Arthur Van Beek
@@ -410,7 +410,8 @@ static USHORT _FillFileLb(HWND hDlg)
 		DosClose(hFile);
 		if (!rc && BytesRead == sizeof(Buffer)) {
 		    ul = strncmp(Buffer, "MZ", 2) ? 0 : *(ULONG*)(Buffer + OFFSET_EXE_HEADER);
-		    addToListbox = strncmp(&Buffer[ul], "LX", 2) == 0 || strncmp(&Buffer[ul], "NE", 2) == 0;
+		    // 2016-02-26 SHL Avoid going beyond end of buffer
+		    addToListbox = ul < sizeof(Buffer) - 4 && (strncmp(&Buffer[ul], "LX", 2) == 0 || strncmp(&Buffer[ul], "NE", 2) == 0);
 		}
 	    }
 	}

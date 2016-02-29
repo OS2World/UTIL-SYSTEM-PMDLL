@@ -1,5 +1,5 @@
 
-PMDLL.EXE version 2.11                          	02 Apr 2013
+PMDLL.EXE version 2.12                          	26 Feb 2016
 ======================
 
 PMDLL is an OS/2 presentation manager program that can show you the of DLLs
@@ -273,4 +273,4 @@ I also monitor most of the comp.os.os2.programmer.* newsgroups.
 
 Thanks and enjoy.
 
-$Id: ReadMe.txt,v 1.7 2013/04/03 00:13:54 Steven Exp $
+$Id: ReadMe.txt,v 1.8 2016/02/27 04:43:00 Steven Exp $
